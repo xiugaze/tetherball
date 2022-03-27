@@ -12,9 +12,9 @@ const int BUTTON_RED_PIN = 3; // pin for red button
 
 bool direction = true;  // true == counterclockwise (away from origin)
 
-int prevPosition = 10;
-int currentPosition = 20;
-int nextPosition = 30; 
+int prevPosition = 0;
+int currentPosition = 1;
+int nextPosition = 2; 
 
 int currentStateRed;
 int currentStateBlue;
@@ -39,10 +39,11 @@ void loop() {
     direction = !direction;
   }
 
-  if(currentPosition == 525 && direction) {
-    nextPosition = 30;
-    currentPosition = 20;
-    prevPosition = 10;
+  if(currentPosition == 516 && direction) {
+    nextPosition = 11;
+    currentPosition = 1;
+    prevPosition = 515;
+
   } else if (currentPosition == 20 && !direction) {
     prevPosition = 525;
     currentPosition = 525;
@@ -61,9 +62,9 @@ void loop() {
 
 
   strip.fill(black, prevPosition, 10);
-  strip.fill(orange, currentPosition - 5, 10);
+  strip.fill(orange, currentPosition, 10);
   strip.fill(black, nextPosition, 10);
-  //delay(5);
+  delay(4000);
 
   /*
   strip.setPixelColor(prevPosition, 0,0,0);
