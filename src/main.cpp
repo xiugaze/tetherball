@@ -52,9 +52,9 @@ void loop() {
   }
 
 
-  leds.setPixelColor(prevPosition, 0,0,0);
-  leds.setPixelColor(currentPosition, 255,255,255);
-  leds.setPixelColor(nextPosition, 0,0,0);
+  leds.setPixelColor(NUM_LED * 3 * prevPosition, 0,0,0);
+  leds.setPixelColor(NUM_LED * 3 * currentPosition, 255,255,255);
+  leds.setPixelColor(NUM_LED * 3 * nextPosition, 0,0,0);
   Serial.print(String(currentPosition));
   delay(500);
   leds.show();
