@@ -3,7 +3,7 @@
 #include <Wire.h>
 
 #define LED_PIN 6
-#define LED_COUNT 526
+#define LED_COUNT 525
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 const int BUTTON_BLUE_PIN = 2; // pin for blue button
@@ -12,9 +12,9 @@ const int BUTTON_RED_PIN = 3; // pin for red button
 
 bool direction = true;  // true == counterclockwise (away from origin)
 
-int prevPosition = 1;
-int currentPosition = 2;
-int nextPosition =3; 
+int prevPosition = 10;
+int currentPosition = 20;
+int nextPosition = 30; 
 
 int currentStateRed;
 int currentStateBlue;
@@ -39,18 +39,18 @@ void loop() {
     direction = !direction;
   }
 
-  if(currentPosition == 526 && direction) {
-    nextPosition = 3;
-    currentPosition = 2;
-    prevPosition = 1;
-  } else if (currentPosition == 1 && !direction) {
-    prevPosition = 526;
+  if(currentPosition == 525 && direction) {
+    nextPosition = 30;
+    currentPosition = 20;
+    prevPosition = 10;
+  } else if (currentPosition == 20 && !direction) {
+    prevPosition = 525;
     currentPosition = 525;
     nextPosition = 524;
   } else {
-    currentPosition = direction ? currentPosition + 1 : currentPosition - 1;
-    nextPosition = direction ? nextPosition + 1 : nextPosition - 1;
-    prevPosition = direction ? prevPosition + 1 : prevPosition - 1;
+    currentPosition = direction ? currentPosition + 5 : currentPosition - 5;
+    nextPosition = direction ? nextPosition + 5 : nextPosition - 5;
+    prevPosition = direction ? prevPosition + 5 : prevPosition - 5;
   }
 
 
@@ -60,10 +60,10 @@ void loop() {
   uint32_t black = strip.Color(0, 0, 0);
 
 
-  strip.fill(black, prevPosition - 5, 10);
+  strip.fill(black, prevPosition, 10);
   strip.fill(orange, currentPosition - 5, 10);
-  strip.fill(black, nextPosition - 5, 10);
-  delay(100);
+  strip.fill(black, nextPosition, 10);
+  //delay(5);
 
   /*
   strip.setPixelColor(prevPosition, 0,0,0);
