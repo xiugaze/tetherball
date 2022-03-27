@@ -12,9 +12,9 @@ const int BUTTON_RED_PIN = 3; // pin for red button
 
 bool direction = true;  // true == counterclockwise (away from origin)
 
-int prevPosition = 526;
-int currentPosition = 1;
-int nextPosition =2; 
+int prevPosition = 1;
+int currentPosition = 2;
+int nextPosition =3; 
 
 int currentStateRed;
 int currentStateBlue;
@@ -40,13 +40,13 @@ void loop() {
   }
 
   if(currentPosition == 526 && direction) {
-    nextPosition = 2;
-    currentPosition = 1;
-    prevPosition = 526;
-  } else if (currentPosition == 1 && !direction) {
+    nextPosition = 3;
+    currentPosition = 2;
     prevPosition = 1;
-    currentPosition = 526;
-    nextPosition = 525;
+  } else if (currentPosition == 1 && !direction) {
+    prevPosition = 526;
+    currentPosition = 525;
+    nextPosition = 524;
   } else {
     currentPosition = direction ? currentPosition + 1 : currentPosition - 1;
     nextPosition = direction ? nextPosition + 1 : nextPosition - 1;
@@ -54,10 +54,24 @@ void loop() {
   }
 
 
+  uint32_t red = strip.Color(255, 0, 0);
+  uint32_t orange = strip.Color(255, 100, 0);
+  uint32_t green = strip.Color(0, 255, 0);
+  uint32_t black = strip.Color(0, 0, 0);
+
+
+  strip.fill(black, prevPosition - 5, 10);
+  strip.fill(orange, currentPosition - 5, 10);
+  strip.fill(black, nextPosition - 5, 10);
+  delay(100);
+
+  /*
   strip.setPixelColor(prevPosition, 0,0,0);
   strip.setPixelColor(currentPosition, 255,255,255);
   strip.setPixelColor(nextPosition, 0,0,0);
   //strip.print(String(currentPosition));
-  delay(500);
+  //delayMicroseconds(1);
+  */
+
   strip.show();
 }
