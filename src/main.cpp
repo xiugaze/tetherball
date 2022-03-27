@@ -1,13 +1,14 @@
 #include <Arduino.h>
-#include <Adafruit_NeoPXL8.h>
+#include <Adafruit_NeoPixel.h>
+#include <Wire.h>
 
-#define NUM_LED 526  
+#define LED_PIN 6
+#define LED_COUNT 526
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 const int BUTTON_BLUE_PIN = 2; // pin for blue button
 const int BUTTON_RED_PIN = 3; // pin for red button
 
-int8_t pins[8] = { 13, 12, 11, 10, SCK, 5, 9, 6 };
-Adafruit_NeoPXL8 leds(NUM_LED, pins, NEO_GRB);
 
 bool direction = true;  // true == counterclockwise (away from origin)
 
@@ -22,8 +23,9 @@ int currentStateBlue;
 void setup() {
   Serial.begin(9600);
   
-  leds.begin();
-  leds.setBrightness(100);
+  strip.begin();
+  //strip.setBrightness(100);
+  strip.show();
 
   pinMode(BUTTON_BLUE_PIN, INPUT_PULLUP); // active low button
   pinMode(BUTTON_RED_PIN, INPUT_PULLUP); // active low button
@@ -52,10 +54,10 @@ void loop() {
   }
 
 
-  leds.setPixelColor(prevPosition, 0,0,0);
-  leds.setPixelColor(currentPosition, 255,255,255);
-  leds.setPixelColor(nextPosition, 0,0,0);
-  Serial.print(String(currentPosition));
+  strip.setPixelColor(prevPosition, 0,0,0);
+  strip.setPixelColor(currentPosition, 255,255,255);
+  strip.setPixelColor(nextPosition, 0,0,0);
+  //strip.print(String(currentPosition));
   delay(500);
-  leds.show();
+  strip.show();
 }
