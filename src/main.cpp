@@ -51,8 +51,9 @@ void loop() {
     prevPosition = direction ? prevPosition + 1 : prevPosition - 1;
   }
 
-  leds.setPixelColor(currentPosition - 1, 0x000000);
+
+  leds.setPixelColor(prevPosition, 0x000000);
   leds.setPixelColor(currentPosition, 0xFFFFFF);
-  leds.setPixelColor(currentPosition + 1, 0x000000);
+  leds.setPixelColor(nextPosition, 0x000000);
   delay(10);
 }
