@@ -33,7 +33,7 @@ void loop() {
   currentStateBlue = digitalRead(BUTTON_BLUE_PIN);
   currentStateRed = digitalRead(BUTTON_RED_PIN);
 
-  if(BUTTON_BLUE_PIN == LOW) {
+  if(BUTTON_BLUE_PIN == HIGH) {
     direction = !direction;
   }
 
@@ -52,8 +52,9 @@ void loop() {
   }
 
 
-  leds.setPixelColor(prevPosition, 0x000000);
-  leds.setPixelColor(currentPosition, 0xFFFFFF);
-  leds.setPixelColor(nextPosition, 0x000000);
-  delay(10);
+  leds.setPixelColor(prevPosition, 0,0,0);
+  leds.setPixelColor(currentPosition, 255,255,255);
+  leds.setPixelColor(nextPosition, 0,0,0);
+  delay(500);
+  leds.show();
 }
